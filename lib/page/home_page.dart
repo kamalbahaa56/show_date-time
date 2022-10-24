@@ -11,7 +11,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 //Time
-String hour = '';
+int hour =0;
 String min = '';
 String sec = '';
 //Dates 
@@ -20,7 +20,7 @@ String day = '';
 String month= '';
 String weekDay = '';
 String welcome = '';
-
+String pmoram='am';
 
 class _MyHomePageState extends State<MyHomePage> {
   ChangeEverySec(){
@@ -30,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
      day = DateTime.now().day.toString();
      month = DateTime.now().month.toString();
     weekDay = DateTime.now().weekday.toString();
+  
      switch(month){
       case '1' : month='January';
       break;
@@ -85,7 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
          break;
        default:
      }
-      hour = DateTime.now().hour.toString();
+      hour = DateTime.now().hour;
+        if (hour>12) {
+       hour = hour - 12;
+       pmoram='pm';
+    }
       min = DateTime.now().minute.toString();
       sec = DateTime.now().second.toString();
 
@@ -129,7 +134,7 @@ setState(() {
                Text("$month $day , $year",style: TextStyle(fontSize: 27,color: Colors.white),
               ),
               SizedBox(height: 10,),
-               Text("${hour.padLeft(2,('0'))} :${min.padLeft(2,('0'))} : ${sec.padLeft(2,('0'))} ",style: TextStyle(fontSize: 27,color: Colors.white),
+               Text("${hour.toString().padLeft(2,('0'))} :${min.padLeft(2,('0'))} : ${sec.padLeft(2,('0'))}  $pmoram ",style: TextStyle(fontSize: 27,color: Colors.white),
               ),
               SizedBox(height: 10,),
                Text(welcome),
